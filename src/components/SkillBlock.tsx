@@ -1,3 +1,4 @@
+import React from 'react'
 import { SiDotnet, SiFlutter, SiFirebase, SiPostgresql, SiMysql, SiOracle, SiJavascript, SiHtml5, SiCss3, SiBootstrap, SiGithub } from 'react-icons/si'
 import { FaBrain } from 'react-icons/fa'
 
@@ -9,7 +10,7 @@ type SkillBlockProps = {
 
 function SkillBlock({ isDark, title, items }: SkillBlockProps) {
   const getIcon = (skill: string) => {
-    const iconMap: { [key: string]: JSX.Element } = {
+    const iconMap: { [key: string]: React.JSX.Element } = {
       '.NET': <SiDotnet size={14} style={{ color: '#512bd4' }} />,
       'Flutter': <SiFlutter size={14} style={{ color: '#02569b' }} />,
       'Firebase Auth': <SiFirebase size={14} style={{ color: '#ffca28' }} />,

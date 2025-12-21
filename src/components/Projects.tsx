@@ -1,4 +1,3 @@
-import React from 'react'
 import { projects } from '../data'
 import { SiSharp, SiDotnet, SiFlutter, SiFirebase, SiReact, SiVite, SiTailwindcss, SiPostgresql, SiOracle, SiMysql, SiJavascript, SiPhp } from 'react-icons/si'
 
@@ -11,7 +10,7 @@ function Projects({ isDark }: ProjectsProps) {
   const otherProjects = projects.slice(1); // Other projects
 
   const getIcon = (tech: string) => {
-    const iconMap: { [key: string]: JSX.Element } = {
+    const iconMap: { [key: string]: React.JSX.Element } = {
       'C#': <SiSharp style={{ color: '#239120' }} />,
       '.NET': <SiDotnet style={{ color: '#512BD4' }} />,
       'ASP.NET Core': <SiDotnet style={{ color: '#512BD4' }} />,
