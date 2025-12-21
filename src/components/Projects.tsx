@@ -1,4 +1,6 @@
+import React from 'react'
 import { projects } from '../data'
+import { SiSharp, SiDotnet, SiFlutter, SiFirebase, SiReact, SiVite, SiTailwindcss, SiPostgresql, SiOracle, SiMysql, SiJavascript, SiPhp } from 'react-icons/si'
 
 type ProjectsProps = {
   isDark: boolean;
@@ -7,6 +9,30 @@ type ProjectsProps = {
 function Projects({ isDark }: ProjectsProps) {
   const fypProject = projects[0]; // Final Year Project
   const otherProjects = projects.slice(1); // Other projects
+
+  const getIcon = (tech: string) => {
+    const iconMap: { [key: string]: JSX.Element } = {
+      'C#': <SiSharp style={{ color: '#239120' }} />,
+      '.NET': <SiDotnet style={{ color: '#512BD4' }} />,
+      'ASP.NET Core': <SiDotnet style={{ color: '#512BD4' }} />,
+      'ASP.NET Web API': <SiDotnet style={{ color: '#512BD4' }} />,
+      'Entity Framework Core': <SiDotnet style={{ color: '#512BD4' }} />,
+      'Flutter': <SiFlutter style={{ color: '#02569B' }} />,
+      'Firebase': <SiFirebase style={{ color: '#FFCA28' }} />,
+      'Firestore': <SiFirebase style={{ color: '#FFCA28' }} />,
+      'FCM': <SiFirebase style={{ color: '#FFCA28' }} />,
+      'React': <SiReact style={{ color: '#61DAFB' }} />,
+      'Vite': <SiVite style={{ color: '#646CFF' }} />,
+      'Tailwind CSS': <SiTailwindcss style={{ color: '#06B6D4' }} />,
+      'PostgreSQL': <SiPostgresql style={{ color: '#336791' }} />,
+      'Oracle Database': <SiOracle style={{ color: '#F80000' }} />,
+      'SQL': <SiPostgresql style={{ color: '#336791' }} />, // Using PostgreSQL icon for SQL
+      'MySQL': <SiMysql style={{ color: '#4479A1' }} />,
+      'JavaScript': <SiJavascript style={{ color: '#F7DF1E' }} />,
+      'PHP': <SiPhp style={{ color: '#777BB4' }} />,
+    };
+    return iconMap[tech] || null;
+  };
 
   return (
     <section id="projects" className="space-y-12">
@@ -30,8 +56,8 @@ function Projects({ isDark }: ProjectsProps) {
             <p className={`text-base leading-relaxed text-center mb-8 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{fypProject.description}</p>
             <div className="flex flex-wrap gap-3 justify-center">
               {fypProject.tech.map((t) => (
-                <span key={t} className={`px-4 py-2 text-sm font-medium rounded-full border ${isDark ? 'bg-cyan-600/20 border-cyan-400/50 text-cyan-200' : 'bg-cyan-50 border-cyan-300 text-cyan-700'}`}>
-                  {t}
+                <span key={t} className={`px-4 py-2 text-sm font-medium rounded-full border flex items-center gap-2 ${isDark ? 'bg-cyan-600/20 border-cyan-400/50 text-cyan-200' : 'bg-cyan-50 border-cyan-300 text-cyan-700'}`}>
+                  {getIcon(t)} {t}
                 </span>
               ))}
             </div>
@@ -51,8 +77,8 @@ function Projects({ isDark }: ProjectsProps) {
               </div>
               <div className="flex flex-wrap gap-2 justify-center">
                 {project.tech.map((t) => (
-                  <span key={t} className={`px-3 py-1.5 text-xs font-medium rounded-full border ${isDark ? 'bg-slate-800/60 border-slate-600 text-slate-200' : 'bg-white border-slate-300 text-slate-700'}`}>
-                    {t}
+                  <span key={t} className={`px-3 py-1.5 text-xs font-medium rounded-full border flex items-center gap-1.5 ${isDark ? 'bg-slate-800/60 border-slate-600 text-slate-200' : 'bg-white border-slate-300 text-slate-700'}`}>
+                    {getIcon(t)} {t}
                   </span>
                 ))}
               </div>
