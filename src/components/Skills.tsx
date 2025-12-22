@@ -13,7 +13,7 @@ function Skills({ isDark }: SkillsProps) {
         <h2 className={`text-4xl md:text-5xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Skills</h2>
         <div className={`w-24 h-1 mx-auto rounded-full ${isDark ? 'bg-cyan-400' : 'bg-cyan-600'}`}></div>
       </div>
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         <SkillBlock isDark={isDark} title="Backend" items={skills.backend} />
         <SkillBlock isDark={isDark} title="Databases" items={skills.databases} />
         <SkillBlock isDark={isDark} title="Mobile" items={skills.mobile} />

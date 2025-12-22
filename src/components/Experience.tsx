@@ -18,21 +18,21 @@ function Experience({ isDark }: ExperienceProps) {
       <div className="grid gap-6">
         {experience.map((item) => (
           <div key={item.company} className={`rounded-xl border p-6 ${isDark ? 'bg-[#181f2e]/80 border-gray-800' : 'bg-slate-50 border-slate-200'}`}>
-            <div className="flex justify-between items-start gap-4 mb-3">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-3">
               <div>
                 <p className={`text-xs font-semibold ${isDark ? 'text-slate-200' : 'text-slate-600'}`}>{item.period}</p>
                 <h3 className={`text-xl font-bold mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{item.role}</h3>
                 <p className={isDark ? 'text-slate-200' : 'text-slate-600'}>{item.company}</p>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center sm:justify-end gap-3 flex-shrink-0">
                 {item.company.includes('PTA') && (
-                  <img src={ptaLogo} alt="PTA Logo" className="w-10 h-10 object-contain rounded" />
+                  <img src={ptaLogo} alt="PTA Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded" />
                 )}
                 {item.company.includes('HBL') && (
-                  <img src={hblLogo} alt="HBL Logo" className="w-10 h-10 object-contain rounded" />
+                  <img src={hblLogo} alt="HBL Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded" />
                 )}
-                <a href={item.link} target="_blank" rel="noreferrer" className={`p-2 rounded-lg border transition-all ${isDark ? 'border-slate-700 hover:text-cyan-400 hover:border-cyan-400/50' : 'border-slate-300 hover:text-cyan-600 hover:border-cyan-600'}`}>
-                  <ExternalLink size={18} />
+                <a href={item.link} target="_blank" rel="noreferrer" className={`p-2 rounded-lg border transition-all hover:scale-105 flex-shrink-0 ${isDark ? 'border-slate-700 hover:text-cyan-400 hover:border-cyan-400/50' : 'border-slate-300 hover:text-cyan-600 hover:border-cyan-600'}`}>
+                  <ExternalLink size={16} />
                 </a>
               </div>
             </div>

@@ -1,14 +1,14 @@
 export const profile = {
   name: 'Muhammad Hassan Askari',
-  title: 'Backend Engineer | C# · .NET · SQL',
+  title: 'Full-Stack Developer | Backend Engineer | AI Enthusiast | C# · .NET · Flutter · React',
   location: 'Islamabad, Pakistan',
   email: 'askari.syed04@gmail.com',
   phone: '+92 335 555 2845',
   github: 'https://github.com/AskariSyed',
   summary:
-    'Final-year CS student focused on backend engineering, scalable systems, and intelligent software. Experienced with ASP.NET Web API, SQL, and Flutter for cross-platform delivery.',
+    'Dynamic final-year Computer Science student at COMSATS University Islamabad (expected graduation: June 2026) with a passion for backend engineering, scalable architectures, and intelligent software solutions. Proficient in ASP.NET Web API, SQL databases, and Flutter for cross-platform mobile development. Committed to delivering high-quality, innovative software that solves real-world problems.',
   about:
-    'I\'m a passionate full-stack developer who turns complex problems into elegant solutions. With expertise in backend systems using C#, .NET, and SQL, I craft robust APIs that power seamless user experiences. My mobile development skills bring ideas to life through cross-platform Flutter apps, while my web development creates responsive, modern interfaces. Beyond code, I\'m fascinated by AI and computer vision, constantly exploring how intelligent systems can revolutionize workflows and enhance user experiences. Let\'s build something extraordinary together.',
+    'I\'m a passionate full-stack developer who transforms complex challenges into elegant, scalable solutions. As a final-year Computer Science student at COMSATS University Islamabad (expected graduation: June 2026), I specialize in crafting robust backend systems using C#, .NET, and SQL to build powerful APIs that drive seamless user experiences. My expertise extends to cross-platform mobile development with Flutter, creating intuitive apps that work flawlessly across devices. I also excel in modern web development, designing responsive, visually stunning interfaces that captivate users. Beyond traditional development, I\'m deeply fascinated by artificial intelligence and computer vision, constantly exploring how intelligent systems can revolutionize workflows and enhance human experiences. With a proven track record of delivering high-quality software solutions and a relentless drive for innovation, I\'m ready to collaborate on extraordinary projects that push the boundaries of what\'s possible. Let\'s create something remarkable together.',
 }
 
 export const experience = [
@@ -40,7 +40,7 @@ export const experience = [
 
 export const projects = [
   {
-    name: 'Job Fair Portal (Final Year Project)',
+    name: 'COMSATS Wah Job Fair Portal (Final Year Project)',
     tech: [
       'ASP.NET Core',
       'Entity Framework Core',
@@ -53,12 +53,12 @@ export const projects = [
       'PostgreSQL',
     ],
     description:
-      'A comprehensive, multi-portal solution for university job fairs. Includes admin, company, and student web portals, plus a cross-platform Flutter mobile app. Features multi-role authentication, real-time notifications, automated room allocation, and unified experience across web and mobile. Backend API built with ASP.NET Core, PostgreSQL database, and FCM for notifications.',
+      'A comprehensive, multi-portal solution specifically designed for COMSATS University Islamabad, Wah Campus job fairs. Includes admin, company, and student web portals, plus a cross-platform Flutter mobile app. Features multi-role authentication, real-time notifications, automated room allocation, and unified experience across web and mobile platforms. Backend API built with ASP.NET Core, PostgreSQL database, and FCM for notifications.',
     link: '', // Add GitHub link if available
     summary: `\
-Admin Portal: Modern web interface for event management, analytics, and room allocation.\n\
-Companies Portal: Company registration, job posting, and student interaction.\n\
-Student Portal: Web and Flutter app for registration, resume upload, job applications, and notifications.\n\
+Admin Portal: Modern web interface for COMSATS Wah job fair event management, analytics, and room allocation.\n\
+Companies Portal: Company registration, job posting, and direct student interaction for COMSATS Wah campus recruitment.\n\
+Student Portal: Web and Flutter app for COMSATS Wah students to register, upload resumes, apply for jobs, and receive notifications.\n\
 `,
   },
   {
@@ -104,7 +104,7 @@ export const skills = {
 export const education = {
   school: 'COMSATS University Islamabad, Wah Campus',
   degree: 'BS Computer Science',
-  period: 'Sep 2022 – Present',
+  period: 'Sep 2022 – Jun 2026 (Expected Graduation)',
   location: 'Wah, Pakistan',
   grade: 'CGPA 3.59/4',
   credits: '133 credit hours',

@@ -32,11 +32,11 @@ function SkillBlock({ isDark, title, items }: SkillBlockProps) {
   }
 
   return (
-    <div className={`rounded-xl border p-6 text-center ${isDark ? 'bg-slate-900/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+    <div className={`rounded-xl border p-4 md:p-6 text-center ${isDark ? 'bg-slate-900/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
       <h3 className={`font-bold mb-3 ${isDark ? 'text-cyan-100' : 'text-slate-900'}`}>{title}</h3>
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex flex-wrap gap-1.5 md:gap-2 justify-center">
         {items.map((item) => (
-          <span key={item} className={`px-3 py-1 text-xs rounded-full flex items-center gap-1 ${isDark ? 'bg-gray-700/70 text-cyan-200' : 'bg-slate-100 text-slate-700'}`}>
+          <span key={item} className={`px-2 py-1 md:px-3 md:py-1 text-xs rounded-full flex items-center gap-1 ${isDark ? 'bg-gray-700/70 text-cyan-200' : 'bg-slate-100 text-slate-700'}`}>
             {getIcon(item)}
             {item}
           </span>
