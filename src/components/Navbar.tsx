@@ -50,11 +50,11 @@ function Navbar({ isDark, toggleTheme, mobileMenuOpen, setMobileMenuOpen }: Navb
       {/* Mobile Nav Menu */}
       {mobileMenuOpen && (
         <div className={`md:hidden ${isDark ? 'bg-slate-900' : 'bg-white'} border-t ${isDark ? 'border-slate-800' : 'border-slate-200'}`}>
-          <a href="#about" className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>About</a>
-          <a href="#experience" className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>Experience</a>
-          <a href="#projects" className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>Projects</a>
-          <a href="#skills" className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>Skills</a>
-          <a href="#contact" className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>Contact</a>
+          <a href="#about" onClick={() => setMobileMenuOpen(false)} className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>About</a>
+          <a href="#experience" onClick={() => setMobileMenuOpen(false)} className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>Experience</a>
+          <a href="#projects" onClick={() => setMobileMenuOpen(false)} className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>Projects</a>
+          <a href="#skills" onClick={() => setMobileMenuOpen(false)} className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>Skills</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)} className={`block px-6 py-3 text-base font-medium ${isDark ? 'text-slate-100 hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-50'}`}>Contact</a>
         </div>
       )}
     </nav>
