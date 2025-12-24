@@ -24,7 +24,7 @@ function Education({ isDark }: EducationProps) {
           <img src={comsatsLogo} alt="COMSATS University" className="w-12 h-12 object-contain rounded-lg border" />
         </div>
         <p className={`text-xs mb-4 ${isDark ? 'text-slate-200' : 'text-slate-600'}`}>{education.location}</p>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mb-4">
           {[education.grade, education.credits].map((t) => (
             <span key={t} className={`px-3 py-1 text-xs rounded-full ${isDark ? 'bg-slate-700/50 text-slate-300' : 'bg-slate-100 text-slate-700'}`}>
               {t}
@@ -34,6 +34,13 @@ function Education({ isDark }: EducationProps) {
             University site <ArrowUpRight size={12} />
           </a>
         </div>
+        {education.activities && education.activities.length > 0 && (
+          <ul className="list-disc pl-5 space-y-1 text-sm mt-2">
+            {education.activities.map((activity: string) => (
+              <li key={activity} className={isDark ? 'text-slate-200' : 'text-slate-700'}>{activity}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   )

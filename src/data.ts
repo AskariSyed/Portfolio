@@ -8,7 +8,7 @@ export const profile = {
   summary:
     'Dynamic final-year Computer Science student at COMSATS University Islamabad (expected graduation: June 2026) with a passion for backend engineering, scalable architectures, and intelligent software solutions. Proficient in ASP.NET Web API, SQL databases, and Flutter for cross-platform mobile development. Committed to delivering high-quality, innovative software that solves real-world problems.',
   about:
-    'I\'m a passionate full-stack developer who transforms complex challenges into elegant, scalable solutions. As a final-year Computer Science student at COMSATS University Islamabad (expected graduation: June 2026), I specialize in crafting robust backend systems using C#, .NET, and SQL to build powerful APIs that drive seamless user experiences. My expertise extends to cross-platform mobile development with Flutter, creating intuitive apps that work flawlessly across devices. I also excel in modern web development, designing responsive, visually stunning interfaces that captivate users. Beyond traditional development, I\'m deeply fascinated by artificial intelligence and computer vision, constantly exploring how intelligent systems can revolutionize workflows and enhance human experiences. With a proven track record of delivering high-quality software solutions and a relentless drive for innovation, I\'m ready to collaborate on extraordinary projects that push the boundaries of what\'s possible. Let\'s create something remarkable together.',
+    'I\'m a passionate full-stack developer who transforms complex challenges into elegant, scalable solutions. As a final-year Computer Science student at COMSATS University Islamabad (expected graduation: June 2026), I specialize in crafting robust backend systems using C#, .NET, and SQL to build powerful APIs that drive seamless user experiences. My expertise extends to cross-platform mobile development with Flutter, creating intuitive apps that work flawlessly across devices. I also excel in modern web development, designing responsive, visually stunning interfaces that captivate users. Beyond traditional development, I\'m deeply fascinated by artificial intelligence and computer vision, constantly exploring how intelligent systems can revolutionize workflows and enhance human experiences.\n\nWith a proven track record of delivering high-quality software solutions and a relentless drive for innovation, I\'m ready to collaborate on extraordinary projects that push the boundaries of what\'s possible. Let\'s create something remarkable together.',
 }
 
 export const experience = [
@@ -109,6 +109,12 @@ export const education = {
   grade: 'CGPA 3.59/4',
   credits: '133 credit hours',
   site: 'https://comsats.edu.pk/',
+  activities: [
+    "Head of Operations, Student Startup Business Society (CUI Wah) (May 2025 – Present)",
+    "Organized Students' Week (twice)",
+    'Participant, Visio Spark 2025 (Mobile App Development)',
+    "Organizing Team, COMSATS Open House & Job Fair (twice)",
+  ],
 }
 
 export const publications = [
@@ -129,5 +135,15 @@ export const certifications = [
     name: 'Professional Freelancing Training Program – Professional Logo Designing',
     issuer: 'Online',
     date: 'Oct 2022',
+  },
+  {
+    name: "Students' Week (Organizer & Participant)",
+    issuer: 'COMSATS University Islamabad',
+    date: '2023, 2024',
+  },
+  {
+    name: 'Visio Spark 2025 (Mobile App Development Participant)',
+    issuer: 'COMSATS University Islamabad',
+    date: '2025',
   },
 ]
