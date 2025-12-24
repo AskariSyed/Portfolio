@@ -7,7 +7,7 @@ type CertificationsProps = {
 
 function Certifications({ isDark }: CertificationsProps) {
   return (
-    <section id="certifications" className="space-y-8">
+    <section id="certifications" className="space-y-8 mt-16 mb-16">
       <div className="text-center space-y-4">
         <div className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`}>Credentials</div>
         <h2 className={`text-4xl md:text-5xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Certifications</h2>

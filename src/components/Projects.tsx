@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
-import { projects } from '../data'
-import { SiSharp, SiDotnet, SiFlutter, SiFirebase, SiReact, SiVite, SiTailwindcss, SiPostgresql, SiOracle, SiMysql, SiJavascript, SiPhp } from 'react-icons/si'
-import companiesList from '../assets/Mockups/FYP/MobileApp/Companies List-left.png'
-import createAccount from '../assets/Mockups/FYP/MobileApp/CreateAccount-left.png'
-import forgetPassword from '../assets/Mockups/FYP/MobileApp/Forget Password-portrait.png'
-import jobs from '../assets/Mockups/FYP/MobileApp/jobs-left.png'
-import notices from '../assets/Mockups/FYP/MobileApp/notices-portrait.png'
-import profile from '../assets/Mockups/FYP/MobileApp/Profile-portrait.png'
-import settings from '../assets/Mockups/FYP/MobileApp/Settings-left.png'
-import web1 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193122-front.png'
-import web2 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193132-front.png'
-import web3 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193156-front.png'
-import web4 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193209-front.png'
-import web5 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193233-front.png'
-import web6 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193245-front.png'
-import web7 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193252-front.png'
-import web8 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193303-front.png'
-import web9 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193324-front.png'
+import React, { useState } from 'react';
+import { projects } from '../data';
+import companiesList from '../assets/Mockups/FYP/MobileApp/Companies List-left.png';
+import createAccount from '../assets/Mockups/FYP/MobileApp/CreateAccount-left.png';
+import forgetPassword from '../assets/Mockups/FYP/MobileApp/Forget Password-portrait.png';
+import jobs from '../assets/Mockups/FYP/MobileApp/jobs-left.png';
+import notices from '../assets/Mockups/FYP/MobileApp/notices-portrait.png';
+import profile from '../assets/Mockups/FYP/MobileApp/Profile-portrait.png';
+import settings from '../assets/Mockups/FYP/MobileApp/Settings-left.png';
+import web1 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193122-front.png';
+import web2 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193132-front.png';
+import web3 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193156-front.png';
+import web4 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193209-front.png';
+import web5 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193233-front.png';
+import web6 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193245-front.png';
+import web7 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193252-front.png';
+import web8 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193303-front.png';
+import web9 from '../assets/Mockups/FYP/WebAppStudent/Screenshot 2025-12-24 193324-front.png';
+import { getIcon } from './common/getIcon';
 
 type ProjectsProps = {
   isDark: boolean;
@@ -81,35 +81,13 @@ function Projects({ isDark }: ProjectsProps) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [lightboxOpen]);
 
-  const getIcon = (tech: string) => {
-    const iconMap: { [key: string]: React.JSX.Element } = {
-      'C#': <SiSharp style={{ color: '#239120' }} />,
-      '.NET': <SiDotnet style={{ color: '#512BD4' }} />,
-      'ASP.NET Core': <SiDotnet style={{ color: '#512BD4' }} />,
-      'ASP.NET Web API': <SiDotnet style={{ color: '#512BD4' }} />,
-      'Entity Framework Core': <SiDotnet style={{ color: '#512BD4' }} />,
-      'Flutter': <SiFlutter style={{ color: '#02569B' }} />,
-      'Firebase': <SiFirebase style={{ color: '#FFCA28' }} />,
-      'Firestore': <SiFirebase style={{ color: '#FFCA28' }} />,
-      'FCM': <SiFirebase style={{ color: '#FFCA28' }} />,
-      'React': <SiReact style={{ color: '#61DAFB' }} />,
-      'Vite': <SiVite style={{ color: '#646CFF' }} />,
-      'Tailwind CSS': <SiTailwindcss style={{ color: '#06B6D4' }} />,
-      'PostgreSQL': <SiPostgresql style={{ color: '#336791' }} />,
-      'Oracle Database': <SiOracle style={{ color: '#F80000' }} />,
-      'SQL': <SiPostgresql style={{ color: '#336791' }} />, // Using PostgreSQL icon for SQL
-      'MySQL': <SiMysql style={{ color: '#4479A1' }} />,
-      'JavaScript': <SiJavascript style={{ color: '#F7DF1E' }} />,
-      'PHP': <SiPhp style={{ color: '#777BB4' }} />,
-    };
-    return iconMap[tech] || null;
-  };
+  // getIcon is now imported from common/getIcon
 
   return (
-    <section id="projects" className="space-y-12">
-      <div className="text-center space-y-4">
+    <section id="projects" className="space-y-12 pt-12">
+      <div className="text-center space-y-4" aria-label="Projects section header">
         <div className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`}>Selected work</div>
-        <h2 className={`text-4xl md:text-5xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Projects</h2>
+        <h2 className={`text-4xl md:text-5xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`} tabIndex={0}>Projects</h2>
         <div className={`w-24 h-1 mx-auto rounded-full ${isDark ? 'bg-cyan-400' : 'bg-cyan-600'}`}></div>
       </div>
 
@@ -144,32 +122,33 @@ function Projects({ isDark }: ProjectsProps) {
               >
                 {showMockups ? 'Hide mockups' : 'Show mockups'}
               </button>
-              <div className={`p-4 rounded-lg transition-all duration-500 ease-in-out ${showMockups ? 'opacity-100 max-h-screen transform translate-y-0' : 'opacity-0 max-h-0 transform -translate-y-4 overflow-hidden'} ${isDark ? 'bg-slate-800/50' : 'bg-slate-100'}`}>
+              <div className={`p-4 rounded-lg transition-all duration-500 ease-in-out ${showMockups ? 'opacity-100 max-h-screen transform translate-y-0' : 'opacity-0 max-h-0 transform -translate-y-4 overflow-hidden'} ${isDark ? 'bg-slate-800/50' : 'bg-slate-100'}`}
+                style={{ maxWidth: '100%', overflowX: 'auto' }}>
                 <div className="space-y-6">
                   <div>
                     <h5 className={`text-sm font-semibold mb-3 ${isDark ? 'text-cyan-300' : 'text-cyan-700'}`}>Mobile App Mockups</h5>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                      <img src={companiesList} alt="Companies List" className="w-full h-auto max-w-full max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '0ms' }} onClick={() => openLightbox(0)} />
-                      <img src={createAccount} alt="Create Account" className="w-full h-auto max-w-full max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '100ms' }} onClick={() => openLightbox(1)} />
-                      <img src={forgetPassword} alt="Forget Password" className="w-full h-auto max-w-full max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '200ms' }} onClick={() => openLightbox(2)} />
-                      <img src={jobs} alt="Jobs" className="w-full h-auto max-w-full max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '300ms' }} onClick={() => openLightbox(3)} />
-                      <img src={notices} alt="Notices" className="w-full h-auto max-w-full max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '400ms' }} onClick={() => openLightbox(4)} />
-                      <img src={profile} alt="Profile" className="w-full h-auto max-w-full max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '500ms' }} onClick={() => openLightbox(5)} />
-                      <img src={settings} alt="Settings" className="w-full h-auto max-w-full max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '600ms' }} onClick={() => openLightbox(6)} />
+                    <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2 sm:gap-4 min-w-0 w-full max-w-full">
+                      <img src={companiesList} alt="Mobile app mockup: Companies List screen" className="w-full h-auto max-w-full max-h-24 sm:max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '0ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(0)} />
+                      <img src={createAccount} alt="Mobile app mockup: Create Account screen" className="w-full h-auto max-w-full max-h-24 sm:max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '100ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(1)} />
+                      <img src={forgetPassword} alt="Mobile app mockup: Forget Password screen" className="w-full h-auto max-w-full max-h-24 sm:max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '200ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(2)} />
+                      <img src={jobs} alt="Mobile app mockup: Jobs screen" className="w-full h-auto max-w-full max-h-24 sm:max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '300ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(3)} />
+                      <img src={notices} alt="Mobile app mockup: Notices screen" className="w-full h-auto max-w-full max-h-24 sm:max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '400ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(4)} />
+                      <img src={profile} alt="Mobile app mockup: Profile screen" className="w-full h-auto max-w-full max-h-24 sm:max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '500ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(5)} />
+                      <img src={settings} alt="Mobile app mockup: Settings screen" className="w-full h-auto max-w-full max-h-24 sm:max-h-32 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '600ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(6)} />
                     </div>
                   </div>
                   <div>
                     <h5 className={`text-sm font-semibold mb-3 ${isDark ? 'text-cyan-300' : 'text-cyan-700'}`}>Web App Mockups</h5>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                      <img src={web1} alt="Web App Screenshot 1" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '0ms' }} onClick={() => openLightbox(7)} />
-                      <img src={web2} alt="Web App Screenshot 2" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '100ms' }} onClick={() => openLightbox(8)} />
-                      <img src={web3} alt="Web App Screenshot 3" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '200ms' }} onClick={() => openLightbox(9)} />
-                      <img src={web4} alt="Web App Screenshot 4" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '300ms' }} onClick={() => openLightbox(10)} />
-                      <img src={web5} alt="Web App Screenshot 5" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '400ms' }} onClick={() => openLightbox(11)} />
-                      <img src={web6} alt="Web App Screenshot 6" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '500ms' }} onClick={() => openLightbox(12)} />
-                      <img src={web7} alt="Web App Screenshot 7" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '600ms' }} onClick={() => openLightbox(13)} />
-                      <img src={web8} alt="Web App Screenshot 8" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '700ms' }} onClick={() => openLightbox(14)} />
-                      <img src={web9} alt="Web App Screenshot 9" className="w-full h-auto max-w-full max-h-64 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '800ms' }} onClick={() => openLightbox(15)} />
+                    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 min-w-0 w-full max-w-full">
+                       <img src={web1} alt="Web app mockup: Screenshot 1" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '0ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(7)} />
+                       <img src={web2} alt="Web app mockup: Screenshot 2" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '100ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(8)} />
+                       <img src={web3} alt="Web app mockup: Screenshot 3" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '200ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(9)} />
+                       <img src={web4} alt="Web app mockup: Screenshot 4" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '300ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(10)} />
+                       <img src={web5} alt="Web app mockup: Screenshot 5" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '400ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(11)} />
+                       <img src={web6} alt="Web app mockup: Screenshot 6" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '500ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(12)} />
+                       <img src={web7} alt="Web app mockup: Screenshot 7" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '600ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(13)} />
+                       <img src={web8} alt="Web app mockup: Screenshot 8" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '700ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(14)} />
+                       <img src={web9} alt="Web app mockup: Screenshot 9" className="w-full h-auto max-w-full max-h-32 sm:max-h-48 object-contain rounded-lg transition-all duration-300 animate-fadeIn cursor-pointer hover:scale-105" style={{ animationDelay: '800ms', maxWidth: '100%' }} loading="lazy" onClick={() => openLightbox(15)} />
                     </div>
                   </div>
                 </div>
@@ -205,6 +184,7 @@ function Projects({ isDark }: ProjectsProps) {
       {lightboxOpen && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           onClick={closeLightbox}
         >
           {/* Close button */}
@@ -241,11 +221,12 @@ function Projects({ isDark }: ProjectsProps) {
           </button>
 
           {/* Main image */}
-          <div className="max-w-lg max-h-[40vh] p-4" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-center w-full h-full p-2 sm:p-4" style={{ maxWidth: '90vw', maxHeight: '90vh' }} onClick={(e) => e.stopPropagation()}>
             <img
               src={allMockups[currentImageIndex].src}
               alt={allMockups[currentImageIndex].alt}
-              className="w-full h-full object-contain rounded-lg shadow-2xl"
+              className="max-w-full max-h-[70vh] sm:max-h-[80vh] object-contain rounded-lg shadow-2xl mx-auto"
+              style={{ display: 'block', margin: '0 auto' }}
             />
           </div>
 

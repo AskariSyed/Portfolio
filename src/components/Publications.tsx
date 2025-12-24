@@ -6,7 +6,7 @@ type PublicationsProps = {
 
 function Publications({ isDark }: PublicationsProps) {
   return (
-    <section id="publications" className="space-y-8">
+    <section id="publications" className="space-y-8 pt-12">
       <div className="text-center space-y-4">
         <div className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`}>Research</div>
         <h2 className={`text-4xl md:text-5xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Publications</h2>
