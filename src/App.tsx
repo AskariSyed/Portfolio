@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import Particles from "react-tsparticles";
+import { useCallback } from "react";
+import { loadSlim } from "tsparticles-slim";
 import About from './components/About'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
@@ -14,6 +18,10 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
+    // Initialize tsparticles engine with loadSlim
+    const particlesInit = useCallback(async (engine: any) => {
+      await loadSlim(engine);
+    }, []);
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem('theme');
     return saved ? JSON.parse(saved) : true;
@@ -27,100 +35,81 @@ function App() {
   };
 
   return (
-    <div className={isDark ? 'dark' : 'light'}>
-      {/* Skip to main content link */}
+    <div className="App" style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          background: { color: { value: isDark ? "#090c16" : "#fff" } },
+          fpsLimit: 60,
+          particles: {
+            color: { value: isDark ? ["#38bdf8", "#0ea5e9", "#6366f1", "#818cf8"] : ["#0ea5e9", "#6366f1", "#818cf8", "#38bdf8"] },
+            links: {
+              enable: true,
+              color: isDark ? "#38bdf8" : "#6366f1",
+              distance: 120,
+              opacity: 0.5,
+              width: 2,
+              triangles: {
+                enable: true,
+                color: isDark ? "#818cf8" : "#6366f1",
+                opacity: 0.1
+              }
+            },
+            move: { enable: true, speed: 2, direction: "none", outModes: { default: "bounce" } },
+            number: { value: 60, density: { enable: true, area: 800 } },
+            opacity: { value: 0.8 },
+            shape: { type: "circle" },
+            size: { value: { min: 2, max: 5 } },
+          },
+          detectRetina: true,
+        }}
+        style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 0 }}
+      />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50"
       >
         Skip to main content
       </a>
-
-      <div className={`min-h-screen ${isDark ? 'bg-[#090c16] text-white' : 'bg-white text-slate-900'} transition-colors duration-500 text-lg md:text-xl`}>
+      <div className={`min-h-screen ${isDark ? 'text-white' : 'text-slate-900'} transition-colors duration-500 text-sm md:text-base`} style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
         <Navbar
           isDark={isDark}
           toggleTheme={toggleTheme}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
         />
-
         <main id="main-content" className="w-full px-4 sm:px-6 md:px-12 lg:px-16 py-8 sm:py-12 md:py-20 space-y-20 sm:space-y-24 md:space-y-28">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
               <Hero isDark={isDark} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}>
               <About isDark={isDark} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }}>
               <Experience isDark={isDark} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }}>
               <Projects isDark={isDark} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} viewport={{ once: true }}>
               <Skills isDark={isDark} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} viewport={{ once: true }}>
               <Education isDark={isDark} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} viewport={{ once: true }}>
               <Publications isDark={isDark} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }} viewport={{ once: true }}>
               <Certifications isDark={isDark} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }} viewport={{ once: true }}>
               <Contact isDark={isDark} />
             </motion.div>
           </div>
         </main>
-
         <Footer isDark={isDark} />
       </div>
     </div>

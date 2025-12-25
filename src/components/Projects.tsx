@@ -23,7 +23,14 @@ type ProjectsProps = {
 };
 
 function Projects({ isDark }: ProjectsProps) {
-  const [showMockups, setShowMockups] = useState(true);
+  // Show mockups by default on desktop, hidden on mobile
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [showMockups, setShowMockups] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 640;
+    }
+    return true;
+  });
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
