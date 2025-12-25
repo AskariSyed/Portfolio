@@ -69,11 +69,35 @@ function Projects({ isDark }: ProjectsProps) {
     setCurrentImageIndex((prev) => (prev === allMockups.length - 1 ? 0 : prev + 1));
   };
 
+  // Keyboard navigation
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!lightboxOpen) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') goToPrevious();
     if (e.key === 'ArrowRight') goToNext();
+  };
+
+  // Touch swipe navigation for mobile
+  const touchStartRef = React.useRef<number | null>(null);
+  const touchEndRef = React.useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartRef.current = e.changedTouches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndRef.current = e.changedTouches[0].clientX;
+    if (touchStartRef.current !== null && touchEndRef.current !== null) {
+      const diff = touchStartRef.current - touchEndRef.current;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          goToNext(); // swipe left
+        } else {
+          goToPrevious(); // swipe right
+        }
+      }
+    }
+    touchStartRef.current = null;
+    touchEndRef.current = null;
   };
 
   React.useEffect(() => {
@@ -182,10 +206,12 @@ function Projects({ isDark }: ProjectsProps) {
 
       {/* Lightbox Modal */}
       {lightboxOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300"
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           {/* Close button */}
           <button
