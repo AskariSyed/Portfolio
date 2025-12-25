@@ -1,21 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import './App.css'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
+import React, { Suspense, useCallback, useState } from 'react';
+import { motion } from 'framer-motion';
+import './App.css';
 import Particles from "react-tsparticles";
-import { useCallback } from "react";
 import { loadSlim } from "tsparticles-slim";
-import About from './components/About'
-import Experience from './components/Experience'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Education from './components/Education'
-import Publications from './components/Publications'
-import Certifications from './components/Certifications'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+const Navbar = React.lazy(() => import('./components/Navbar'));
+const Hero = React.lazy(() => import('./components/Hero'));
+const About = React.lazy(() => import('./components/About'));
+const Experience = React.lazy(() => import('./components/Experience'));
+const Projects = React.lazy(() => import('./components/Projects'));
+const Skills = React.lazy(() => import('./components/Skills'));
+const Education = React.lazy(() => import('./components/Education'));
+const Publications = React.lazy(() => import('./components/Publications'));
+const Certifications = React.lazy(() => import('./components/Certifications'));
+const Contact = React.lazy(() => import('./components/Contact'));
+const Footer = React.lazy(() => import('./components/Footer'));
 
 function App() {
     // Initialize tsparticles engine with loadSlim
@@ -42,6 +40,28 @@ function App() {
         options={{
           background: { color: { value: isDark ? "#090c16" : "#fff" } },
           fpsLimit: 60,
+          interactivity: {
+            events: {
+              onHover: {
+                enable: true,
+                mode: "repulse"
+              },
+              onClick: {
+                enable: true,
+                mode: "push"
+              },
+              resize: true
+            },
+            modes: {
+              repulse: {
+                distance: 120,
+                duration: 0.4
+              },
+              push: {
+                quantity: 4
+              }
+            }
+          },
           particles: {
             color: { value: isDark ? ["#38bdf8", "#0ea5e9", "#6366f1", "#818cf8"] : ["#0ea5e9", "#6366f1", "#818cf8", "#38bdf8"] },
             links: {
@@ -73,44 +93,50 @@ function App() {
         Skip to main content
       </a>
       <div className={`min-h-screen ${isDark ? 'text-white' : 'text-slate-900'} transition-colors duration-500 text-sm md:text-base`} style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
-        <Navbar
-          isDark={isDark}
-          toggleTheme={toggleTheme}
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-        />
+        <Suspense fallback={<div className="w-full text-center py-10">Loading...</div>}>
+          <Navbar
+            isDark={isDark}
+            toggleTheme={toggleTheme}
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
+          />
+        </Suspense>
         <main id="main-content" className="w-full px-4 sm:px-6 md:px-12 lg:px-16 py-8 sm:py-12 md:py-20 space-y-20 sm:space-y-24 md:space-y-28">
           <div className="max-w-7xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-              <Hero isDark={isDark} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}>
-              <About isDark={isDark} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }}>
-              <Experience isDark={isDark} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }}>
-              <Projects isDark={isDark} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} viewport={{ once: true }}>
-              <Skills isDark={isDark} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} viewport={{ once: true }}>
-              <Education isDark={isDark} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} viewport={{ once: true }}>
-              <Publications isDark={isDark} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }} viewport={{ once: true }}>
-              <Certifications isDark={isDark} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }} viewport={{ once: true }}>
-              <Contact isDark={isDark} />
-            </motion.div>
+            <Suspense fallback={<div className="w-full text-center py-10">Loading...</div>}>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
+                <Hero isDark={isDark} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}>
+                <About isDark={isDark} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }}>
+                <Experience isDark={isDark} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }}>
+                <Projects isDark={isDark} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} viewport={{ once: true }}>
+                <Skills isDark={isDark} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} viewport={{ once: true }}>
+                <Education isDark={isDark} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} viewport={{ once: true }}>
+                <Publications isDark={isDark} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }} viewport={{ once: true }}>
+                <Certifications isDark={isDark} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }} viewport={{ once: true }}>
+                <Contact isDark={isDark} />
+              </motion.div>
+            </Suspense>
           </div>
         </main>
-        <Footer isDark={isDark} />
+        <Suspense fallback={<div className="w-full text-center py-10">Loading...</div>}>
+          <Footer isDark={isDark} />
+        </Suspense>
       </div>
     </div>
   );
