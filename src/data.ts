@@ -1,12 +1,12 @@
 export const profile = {
   name: 'Muhammad Hassan Askari',
-  title: 'Full-Stack Developer | Backend Engineer | AI Enthusiast | C# · .NET · Flutter · React',
+  title: 'Backend-Focused Full-Stack Developer| AI Enthusiast | C# · .NET · Flutter · React',
   location: 'Islamabad, Pakistan',
   email: 'askari.syed04@gmail.com',
   phone: '+92 335 555 2845',
   github: 'https://github.com/AskariSyed',
-  summary:
-    'Dynamic final-year Computer Science student at COMSATS University Islamabad (expected graduation: June 2026) with a passion for backend engineering, scalable architectures, and intelligent software solutions. Proficient in ASP.NET Web API, SQL databases, and Flutter for cross-platform mobile development. Committed to delivering high-quality, innovative software that solves real-world problems.',
+    summary:
+      'I’m a final-year Computer Science student at COMSATS University Islamabad (graduating June 2026) who enjoys building backend systems and scalable software that actually solves real problems.\n\nI work primarily with ASP.NET Web API, SQL databases, and Flutter for cross-platform mobile apps. I’m especially interested in backend engineering, system design, and building reliable APIs that can grow with real-world usage.\n\nI like shipping things early, improving them iteratively, and learning by building.',
   about:
     'I\'m a passionate full-stack developer who transforms complex challenges into elegant, scalable solutions. As a final-year Computer Science student at COMSATS University Islamabad (expected graduation: June 2026), I specialize in crafting robust backend systems using C#, .NET, and SQL to build powerful APIs that drive seamless user experiences. My expertise extends to cross-platform mobile development with Flutter, creating intuitive apps that work flawlessly across devices. I also excel in modern web development, designing responsive, visually stunning interfaces that captivate users. Beyond traditional development, I\'m deeply fascinated by artificial intelligence and computer vision, constantly exploring how intelligent systems can revolutionize workflows and enhance human experiences.\n\nWith a proven track record of delivering high-quality software solutions and a relentless drive for innovation, I\'m ready to collaborate on extraordinary projects that push the boundaries of what\'s possible. Let\'s create something remarkable together.',
 }
