@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import './App.css';
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
+import type { Engine } from "tsparticles-engine";
 const Navbar = React.lazy(() => import('./components/Navbar'));
 const Hero = React.lazy(() => import('./components/Hero'));
 const About = React.lazy(() => import('./components/About'));
@@ -16,21 +17,8 @@ const Contact = React.lazy(() => import('./components/Contact'));
 const Footer = React.lazy(() => import('./components/Footer'));
 
 function App() {
-      // Rate limiting for particle push (onClick)
-      const [lastParticlePush, setLastParticlePush] = useState(0);
-      const PARTICLE_PUSH_INTERVAL = 500; // ms
-
-      // Custom handler to limit node creation
-      const handleParticlesClick = useCallback((event) => {
-        const now = Date.now();
-        if (now - lastParticlePush > PARTICLE_PUSH_INTERVAL) {
-          setLastParticlePush(now);
-          return true; // allow push
-        }
-        return false; // block push
-      }, [lastParticlePush]);
     // Initialize tsparticles engine with loadSlim
-    const particlesInit = useCallback(async (engine: any) => {
+    const particlesInit = useCallback(async (engine: Engine) => {
       await loadSlim(engine);
     }, []);
   const [isDark, setIsDark] = useState(() => {
@@ -61,10 +49,7 @@ function App() {
               },
               onClick: {
                 enable: true,
-                mode: "push",
-                // Custom handler for rate limiting
-                // This is a workaround: react-tsparticles does not support direct event handler injection,
-                // so we use a workaround by limiting the push mode quantity below
+                mode: "push"
               },
               resize: true
             },
@@ -74,8 +59,7 @@ function App() {
                 duration: 0.4
               },
               push: {
-                // Only allow push if rate limit passes, else push 0
-                quantity: handleParticlesClick() ? 4 : 0
+                quantity: 1 // Lowered for rate limiting
               }
             }
           },
