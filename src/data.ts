@@ -106,7 +106,7 @@ export const education = {
   degree: 'BS Computer Science',
   period: 'Sep 2022 – Jun 2026 (Expected Graduation)',
   location: 'Wah, Pakistan',
-  grade: 'CGPA 3.59/4',
+  grade: 'CGPA 3.64/4',
   credits: '133 credit hours',
   site: 'https://comsats.edu.pk/',
   activities: [
