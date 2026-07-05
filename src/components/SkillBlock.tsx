@@ -1,5 +1,5 @@
 import React from 'react'
-import { SiDotnet, SiFlutter, SiFirebase, SiPostgresql, SiMysql, SiOracle, SiJavascript, SiHtml5, SiCss3, SiBootstrap, SiGithub } from 'react-icons/si'
+import { SiDotnet, SiFlutter, SiFirebase, SiPostgresql, SiMysql, SiOracle, SiJavascript, SiHtml5, SiCss3, SiBootstrap, SiGithub, SiSelenium, SiCypress, SiApachejmeter, SiPostman, SiLinux, SiGit, SiJenkins, SiGithubactions, SiGrafana, SiPrometheus, SiKubernetes, SiDocker, SiAnsible, SiNginx, SiTerraform, SiAmazonec2 } from 'react-icons/si'
 import { FaBrain } from 'react-icons/fa'
 
 type SkillBlockProps = {
@@ -27,6 +27,24 @@ function SkillBlock({ isDark, title, items }: SkillBlockProps) {
       'Machine Learning': <FaBrain size={14} style={{ color: '#4ecdc4' }} />,
       'Deep Learning': <FaBrain size={14} style={{ color: '#45b7d1' }} />,
       'Computer Vision': <FaBrain size={14} style={{ color: '#96ceb4' }} />,
+      'Selenium': <SiSelenium size={14} style={{ color: '#43B02A' }} />,
+      'Cypress': <SiCypress size={14} style={{ color: '#17202C' }} />,
+      'JMeter': <SiApachejmeter size={14} style={{ color: '#D22128' }} />,
+      'Postman': <SiPostman size={14} style={{ color: '#FF6C37' }} />,
+      'Linux': <SiLinux size={14} style={{ color: '#FCC624' }} />,
+      'Git': <SiGit size={14} style={{ color: '#F05032' }} />,
+      'GitHub': <SiGithub size={14} style={{ color: '#181717' }} />,
+      'Jenkins': <SiJenkins size={14} style={{ color: '#D24939' }} />,
+      'GitHub Actions': <SiGithubactions size={14} style={{ color: '#2088FF' }} />,
+      'Grafana': <SiGrafana size={14} style={{ color: '#F46800' }} />,
+      'Prometheus': <SiPrometheus size={14} style={{ color: '#E6522C' }} />,
+      'Loki': <SiGrafana size={14} style={{ color: '#F46800' }} />,
+      'Kubernetes': <SiKubernetes size={14} style={{ color: '#326CE5' }} />,
+      'Docker': <SiDocker size={14} style={{ color: '#2496ED' }} />,
+      'Ansible': <SiAnsible size={14} style={{ color: '#EE0000' }} />,
+      'Nginx': <SiNginx size={14} style={{ color: '#009639' }} />,
+      'Terraform': <SiTerraform size={14} style={{ color: '#7B42BC' }} />,
+      'AWS EC2': <SiAmazonec2 size={14} style={{ color: '#FF9900' }} />,
     }
     return iconMap[skill] || null
   }
