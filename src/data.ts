@@ -53,7 +53,7 @@ export const projects = [
       'PostgreSQL',
     ],
     description:
-      'A comprehensive, multi-portal solution specifically designed for COMSATS University Islamabad, Wah Campus job fairs. Includes admin, company, and student web portals, plus a cross-platform Flutter mobile app. Features multi-role authentication, real-time notifications, automated room allocation, and unified experience across web and mobile platforms. Backend API built with ASP.NET Core, PostgreSQL database, and FCM for notifications.',
+      'A comprehensive, multi-portal solution specifically designed for COMSATS University Islamabad, Wah Campus job fairs. Includes admin, company, and student web portals, plus a cross-platform Flutter mobile app. Features multi-role authentication, real-time notifications, automated room allocation, and unified experience across web and mobile platforms. Backend API built with ASP.NET Core, PostgreSQL database, and FCM for notifications. Successfully beta tested during the CUI Wah Open House and Job Fair Spring 2026, with active usage by 150+ students and 20+ companies.',
     link: '', // Add GitHub link if available
     summary: `\
 Admin Portal: Modern web interface for COMSATS Wah job fair event management, analytics, and room allocation.\n\
@@ -96,7 +96,8 @@ export const skills = {
   databases: ['SQL', 'Oracle', 'MySQL', 'PostgreSQL'],
   mobile: ['Flutter', 'Firebase Auth', 'Firestore'],
   frontend: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
-  qa: ['Manual Testing', 'Regression Testing', 'Access Reviews', 'VBA for QA reporting'],
+  qa: ['Manual Testing', 'Regression Testing', 'Access Reviews', 'VBA for QA reporting', 'Selenium', 'Cypress', 'JMeter', 'Postman'],
+  devops: ['Linux', 'Git', 'GitHub', 'Jenkins', 'GitHub Actions', 'Grafana', 'Prometheus', 'Loki', 'Kubernetes', 'Docker', 'Ansible', 'Nginx', 'Terraform', 'AWS EC2'],
   tools: ['Git/GitHub', 'Agile/Scrum'],
   interests: ['AI', 'Machine Learning', 'Deep Learning', 'Computer Vision'],
 }

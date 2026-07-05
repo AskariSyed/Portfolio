@@ -19,6 +19,7 @@ function Skills({ isDark }: SkillsProps) {
         <SkillBlock isDark={isDark} title="Mobile" items={skills.mobile} />
         <SkillBlock isDark={isDark} title="Frontend" items={skills.frontend} />
         <SkillBlock isDark={isDark} title="QA & Process" items={skills.qa} />
+        <SkillBlock isDark={isDark} title="DevOps" items={skills.devops} />
         <SkillBlock isDark={isDark} title="Tools & Methodology" items={skills.tools} />
         <SkillBlock isDark={isDark} title="Interests" items={skills.interests} />
       </div>
