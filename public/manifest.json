@@ -1,15 +1,20 @@
 {
-  "short_name": "Muhammad Hassan Askari",
+  "short_name": "Hassan Askari",
   "name": "Muhammad Hassan Askari — Software Developer",
+  "description": "Portfolio of Muhammad Hassan Askari — Junior Software Engineer specializing in applied AI, scalable backends, and full-stack development.",
   "icons": [
     {
       "src": "/favicon.svg",
       "type": "image/svg+xml",
-      "sizes": "any"
+      "sizes": "any",
+      "purpose": "any maskable"
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "background_color": "#09090b",
   "theme_color": "#09090b",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "en"
 }

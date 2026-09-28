@@ -31,7 +31,7 @@ export const ScrollAnimationBackground: React.FC = () => {
       `}</style>
       <img
         src="/Bg.png"
-        alt="Avatar"
+        alt="Muhammad Hassan Askari — Software Developer profile background"
         className="max-w-full max-h-full object-contain"
         style={{ animation: 'float 4s ease-in-out infinite' }}
         draggable={false}

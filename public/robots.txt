@@ -1,4 +1,18 @@
+# Allow all crawlers
 User-agent: *
+Allow: /
+Disallow: /scripts/
+
+# Explicitly allow Google to index everything
+User-agent: Googlebot
+Allow: /
+
+# Allow Google to index all images
+User-agent: Googlebot-Image
+Allow: /
+
+# Allow Google to crawl for mobile-first indexing
+User-agent: Googlebot-Mobile
 Allow: /
 
 Sitemap: https://portfolioaskarisyed.vercel.app/sitemap.xml
