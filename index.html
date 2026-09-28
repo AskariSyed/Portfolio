@@ -1,55 +1,170 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Muhammad Hassan Askari - Backend Engineer Portfolio</title>
-    <meta name="description" content="Portfolio of Muhammad Hassan Askari, a Backend Engineer specializing in C#, .NET, and SQL. Final-year CS student with experience in ASP.NET Web API, Flutter, and cross-platform development." />
-    <meta name="keywords" content="backend engineer, C#, .NET, SQL, ASP.NET, Flutter, portfolio, software developer" />
+    <title>Muhammad Hassan Askari — Software Developer (AI &amp; Full-Stack)</title>
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('portfolio-theme');
+          if (saved === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Official developer portfolio of Muhammad Hassan Askari. Software Developer offering freelance engineering across Web, Mobile, scalable backends (ASP.NET Core &amp; FastAPI), and applied AI systems."
+    />
+    <meta
+      name="keywords"
+      content="Muhammad Hassan Askari, Syed Hassan Askari, Hassan Askari, Askari Syed, Syed Hassan Askari Zaidi, Syed Muhammad Hassan Askari Zaidi, AskariSyed, Freelance Software Engineer, Freelance Web Developer, Freelance Mobile Developer, Freelance Backend, Scalable AI, Junior Software Engineer, Software Developer, Backend Engineer, Applied AI, C#, .NET, ASP.NET Core, Python, FastAPI, Flutter, Docker, Kubernetes, AWS, SQL, PostgreSQL, COMSATS, Islamabad"
+    />
     <meta name="author" content="Muhammad Hassan Askari" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href="https://portfolioaskarisyed.vercel.app/" />
+    <link rel="related" href="https://research-with-askari.vercel.app/" title="Academic &amp; Research Portfolio" />
+    <meta property="og:see_also" content="https://research-with-askari.vercel.app/" />
+    <meta name="theme-color" content="#09090b" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://your-portfolio-url.com/" />
-    <meta property="og:title" content="Muhammad Hassan Askari - Backend Engineer Portfolio" />
-    <meta property="og:description" content="Portfolio of Muhammad Hassan Askari, a Backend Engineer specializing in C#, .NET, and SQL." />
-    <meta property="og:image" content="/src/assets/IMG_7930_2.png" />
+    <!-- OpenGraph Metadata -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://portfolioaskarisyed.vercel.app/" />
+    <meta property="og:title" content="Muhammad Hassan Askari — Software Developer (AI &amp; Full-Stack)" />
+    <meta
+      property="og:description"
+      content="Portfolio of Muhammad Hassan Askari. Junior Software Engineer specializing in applied AI, scalable backends, and cloud DevOps."
+    />
+    <meta property="og:image" content="https://portfolioaskarisyed.vercel.app/Bg.png" />
+    <meta property="og:image:alt" content="Muhammad Hassan Askari Portfolio" />
+    <meta property="og:site_name" content="Muhammad Hassan Askari Portfolio" />
+    <meta property="profile:first_name" content="Muhammad Hassan" />
+    <meta property="profile:last_name" content="Askari Zaidi" />
+    <meta property="profile:username" content="AskariSyed" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://your-portfolio-url.com/" />
-    <meta property="twitter:title" content="Muhammad Hassan Askari - Backend Engineer Portfolio" />
-    <meta property="twitter:description" content="Portfolio of Muhammad Hassan Askari, a Backend Engineer specializing in C#, .NET, and SQL." />
-    <meta property="twitter:image" content="/src/assets/IMG_7930_2.png" />
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://portfolioaskarisyed.vercel.app/" />
+    <meta name="twitter:title" content="Muhammad Hassan Askari — Software Developer (AI &amp; Full-Stack)" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Muhammad Hassan Askari. Junior Software Engineer specializing in applied AI, scalable backends, and cloud DevOps."
+    />
+    <meta name="twitter:image" content="https://portfolioaskarisyed.vercel.app/Bg.png" />
 
-    <!-- Structured Data -->
+    <!-- Typography: Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org JSON-LD Structured Data for Google Entity Recognition & SEO -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Muhammad Hassan Askari",
-      "jobTitle": "Backend Engineer",
-      "description": "Final-year CS student focused on backend engineering, scalable systems, and intelligent software.",
-      "url": "https://your-portfolio-url.com/",
-      "sameAs": [
-        "https://github.com/AskariSyed"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Islamabad",
-        "addressCountry": "Pakistan"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+92-335-555-2845",
-        "email": "askari.syed04@gmail.com"
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://portfolioaskarisyed.vercel.app/#person",
+            "name": "Muhammad Hassan Askari",
+            "alternateName": [
+              "Syed Hassan Askari",
+              "Hassan Askari",
+              "Askari Syed",
+              "Syed Hassan Askari Zaidi",
+              "Syed Muhammad Hassan Askari Zaidi",
+              "AskariSyed"
+            ],
+            "givenName": "Muhammad Hassan",
+            "familyName": "Askari Zaidi",
+            "additionalName": "Syed",
+            "jobTitle": "Junior Software Engineer",
+            "description": "Junior Software Engineer specializing in applied AI, scalable backends (ASP.NET Core, FastAPI), cloud DevOps (AWS, Docker), and cross-platform apps.",
+            "url": "https://portfolioaskarisyed.vercel.app/",
+            "image": "https://portfolioaskarisyed.vercel.app/Bg.png",
+            "email": "askari.syed04@gmail.com",
+            "telephone": "+923355552845",
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "COMSATS University Islamabad, Wah Campus",
+              "department": "BS Computer Science"
+            },
+            "knowsAbout": [
+              "C#",
+              ".NET",
+              "ASP.NET Core 8 Web API",
+              "Python",
+              "FastAPI",
+              "Docker",
+              "Kubernetes",
+              "AWS (EC2)",
+              "Terraform",
+              "CI/CD (GitHub Actions)",
+              "Jenkins",
+              "NGINX",
+              "Linux",
+              "PostgreSQL",
+              "SQL Server",
+              "MySQL",
+              "Oracle Database",
+              "Flutter",
+              "React",
+              "TypeScript",
+              "RAG",
+              "LLMs",
+              "pgvector",
+              "Computer Vision",
+              "OpenCV",
+              "YOLOv8"
+            ],
+            "sameAs": [
+              "https://github.com/AskariSyed",
+              "https://www.linkedin.com/in/syed-hassan-askari/",
+              "https://research-with-askari.vercel.app/"
+            ],
+            "relatedLink": [
+              "https://research-with-askari.vercel.app/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://portfolioaskarisyed.vercel.app/#website",
+            "url": "https://portfolioaskarisyed.vercel.app/",
+            "name": "Muhammad Hassan Askari (Syed Hassan Askari) Portfolio",
+            "description": "Personal developer portfolio of Muhammad Hassan Askari (Syed Hassan Askari Zaidi), Junior Software Engineer",
+            "publisher": {
+              "@id": "https://portfolioaskarisyed.vercel.app/#person"
+            }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://portfolioaskarisyed.vercel.app/#webpage",
+            "url": "https://portfolioaskarisyed.vercel.app/",
+            "name": "Muhammad Hassan Askari — Junior Software Engineer Portfolio",
+            "about": {
+              "@id": "https://portfolioaskarisyed.vercel.app/#person"
+            },
+            "mainEntity": {
+              "@id": "https://portfolioaskarisyed.vercel.app/#person"
+            }
+          }
+        ]
       }
-    }
     </script>
   </head>
-  <body>
+  <body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white transition-colors duration-200">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

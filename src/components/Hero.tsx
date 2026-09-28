@@ -1,106 +1,134 @@
-import { Mail, Github, MapPin, Phone, ArrowUpRight, Sparkles, Download, Linkedin } from 'lucide-react';
-import { profile } from '../data';
-import profileImg from '../assets/IMG_7930_2.png';
-import cvFile from '../assets/hassan_europass_cv-5.pdf';
-import SocialButton from './common/SocialButton';
+import React from 'react';
+import { motion, Variants } from 'framer-motion';
+import { ArrowDown, ArrowUpRight, FileText, Eye } from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
+import { useResumeModal } from '../context/ResumeModalContext';
 
-type HeroProps = {
-  isDark: boolean;
-};
+export const Hero: React.FC = () => {
+  const { personal } = portfolioData;
+  const { openResume } = useResumeModal();
 
-const ANIMATION_DURATION = '1.2s';
-const BUTTON_CLASS = (isDark: boolean) => `inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-lg font-medium border transition-all text-center ${isDark ? 'border-gray-700 text-cyan-100 hover:text-cyan-400 hover:border-cyan-400/50' : 'border-slate-300 text-slate-900 hover:text-cyan-600 hover:border-cyan-600'}`;
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
 
-function Hero({ isDark }: HeroProps) {
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
   return (
-    <header id="top" className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-center p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl border ${isDark ? 'bg-[#131a26]/80 border-gray-800' : 'bg-white/40 border-gray-200'} backdrop-blur transition-all duration-700 animate-fadeIn mb-10`} style={{ animationDuration: ANIMATION_DURATION }}>
-      <div className="space-y-6">
-        <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-full text-xs font-bold uppercase tracking-wide ${isDark ? 'bg-cyan-600/30 text-white' : 'bg-cyan-500/10 text-cyan-600'} animate-slideIn`} style={{ animationDuration: ANIMATION_DURATION }}>
-          Backend Engineering · AI-Curious
-        </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight transition-all duration-700">
-          Hi, I'm <span className={isDark ? 'text-white' : 'text-cyan-400'}>{profile.name}</span>
-        </h1>
-        <p className={`text-sm sm:text-base leading-relaxed text-justify ${isDark ? 'text-white' : 'text-gray-700'} transition-all duration-700`}>
-          {profile.summary}
-        </p>
-        <div className="flex flex-col sm:flex-row flex-wrap gap-3 animate-fadeIn items-center justify-center" style={{ animationDuration: '1.5s' }} aria-label="Contact and social links">
-          <SocialButton
-            href={`mailto:${profile.email}`}
-            ariaLabel="Send email"
-            className={BUTTON_CLASS(isDark)}
-            icon={<Mail size={18} />}
-          >
-            Email
-          </SocialButton>
-          <SocialButton
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            ariaLabel="GitHub profile"
-            className={BUTTON_CLASS(isDark)}
-            icon={<Github size={18} />}
-          >
-            GitHub <ArrowUpRight size={16} />
-          </SocialButton>
-          <SocialButton
-            href="https://www.linkedin.com/in/syed-hassan-askari"
-            target="_blank"
-            rel="noopener noreferrer"
-            ariaLabel="LinkedIn profile"
-            className={BUTTON_CLASS(isDark)}
-            icon={<Linkedin size={18} />}
-          >
-            LinkedIn <ArrowUpRight size={16} />
-          </SocialButton>
-          <SocialButton
-            href={cvFile}
-            download
-            ariaLabel="Download CV as PDF"
-            className={BUTTON_CLASS(isDark)}
-            icon={<Download size={18} />}
-          >
-            Download CV
-          </SocialButton>
-        </div>
-        <div className="flex flex-col items-center gap-2 pt-4">
-          <div className="flex items-center gap-3">
-            <MapPin size={18} className={isDark ? 'text-cyan-300' : 'text-slate-600'} />
-            <span className={isDark ? 'text-cyan-100' : 'text-slate-700'}>{profile.location}</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Phone size={18} className={isDark ? 'text-cyan-300' : 'text-slate-600'} />
-            <a href="tel:+923355552845" className={`hover:underline ${isDark ? 'text-cyan-100 hover:text-cyan-400' : 'text-slate-800 hover:text-cyan-600'}`}>{profile.phone}</a>
-          </div>
-          <div className="flex items-center gap-3">
-            <Mail size={18} className={isDark ? 'text-cyan-300' : 'text-slate-600'} />
-            <a href={`mailto:${profile.email}`} className={`hover:underline ${isDark ? 'text-cyan-100 hover:text-cyan-400' : 'text-slate-800 hover:text-cyan-600'}`}>{profile.email}</a>
-          </div>
-        </div>
-      </div>
+    <section className="relative min-h-[90vh] flex flex-col justify-between pt-32 pb-16 px-6 sm:px-8 max-w-6xl mx-auto">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/5 dark:bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
 
-      {/* Profile Card */}
-      <div className={`rounded-xl border p-4 sm:p-6 space-y-4 ${isDark ? 'bg-[#181f2e]/80 border-gray-700' : 'bg-slate-50 border-slate-200'} transition-all duration-700 animate-fadeIn flex flex-col items-center`} style={{ animationDuration: '1.5s' }}>
-        <img src={profileImg} alt="Profile photo of Muhammad Hassan Askari" className="w-32 h-32 sm:w-40 sm:h-40 lg:w-44 lg:h-44 mx-auto rounded-lg border-2 border-cyan-400/30 object-cover" loading="lazy" />
-        <div className="flex items-center justify-center gap-2">
-          <Sparkles size={18} className="text-cyan-400" />
-          <span className={`font-bold text-center ${isDark ? 'text-cyan-100' : 'text-slate-700'}`}>What I do</span>
-        </div>
-        <ul className={`space-y-2 text-sm text-center ${isDark ? 'text-cyan-100' : 'text-slate-700'}`} style={{maxWidth: '320px'}}>
-          <li>• Design APIs, data models, and services with C#/.NET.</li>
-          <li>• Ship cross-platform apps with Flutter and Firebase.</li>
-          <li>• Test, debug, and iterate quickly with Agile teams.</li>
-        </ul>
-        <div className="flex flex-wrap gap-2 pt-2 justify-center">
-          {['ASP.NET Web API', 'SQL', 'Entity Framework', 'Flutter'].map((tag) => (
-            <span key={tag} className={`px-3 py-1 text-xs rounded-full border ${isDark ? 'bg-slate-700/50 border-slate-600 text-slate-100' : 'bg-slate-100 border-slate-300 text-slate-700'}`}>
-              {tag}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="relative z-10 max-w-4xl space-y-8 my-auto"
+      >
+        {/* Availability Badge */}
+        <motion.div variants={itemVariants} className="inline-flex">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-zinc-900/60 dark:bg-zinc-900/60 border border-zinc-800 text-xs font-mono text-zinc-300">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-          ))}
-        </div>
-      </div>
-    </header>
-  );
-}
+            <span>Open for Roles &amp; Freelance (Web · Mobile · Backend · Scalable AI)</span>
+          </div>
+        </motion.div>
 
-export default Hero
+        {/* Role & Name Kicker */}
+        <motion.div variants={itemVariants} className="space-y-3">
+          <p className="text-sm sm:text-base font-mono tracking-wide text-zinc-400 uppercase">
+            {personal.name} · {personal.location}
+          </p>
+
+          {/* Large Typographic Headline */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 leading-[1.08] text-balance">
+            Software Developer crafting applied AI systems &amp; robust full-stack platforms.
+          </h1>
+        </motion.div>
+
+        {/* Short Bio */}
+        <motion.p
+          variants={itemVariants}
+          className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300/90 max-w-2xl font-normal leading-relaxed"
+        >
+          {personal.shortBio}
+        </motion.p>
+
+        {/* Actions & CTAs */}
+        <motion.div variants={itemVariants} className="pt-2 flex flex-wrap items-center gap-4">
+          <a
+            href="#work"
+            className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-lg bg-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 text-sm font-semibold hover:bg-zinc-800 dark:hover:bg-white transition-all shadow-md active:scale-[0.98]"
+          >
+            <span>View my work</span>
+            <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+          </a>
+
+          <button
+            type="button"
+            onClick={openResume}
+            className="group inline-flex items-center gap-2 px-5 py-3.5 rounded-lg bg-blue-600/10 hover:bg-blue-600/20 text-blue-600 dark:text-blue-400 border border-blue-500/30 hover:border-blue-500/50 text-sm font-semibold transition-all shadow-sm active:scale-[0.98] cursor-pointer"
+          >
+            <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <span>Preview CV</span>
+          </button>
+
+          <a
+            href={personal.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            download="Muhammad_Hassan_Askari_CV.pdf"
+            className="group inline-flex items-center gap-2 px-4 py-3.5 rounded-lg bg-zinc-100 dark:bg-zinc-900/80 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 text-sm font-medium transition-all shadow-sm active:scale-[0.98]"
+            title="Download PDF directly"
+          >
+            <FileText className="w-4 h-4 text-zinc-500 group-hover:scale-110 transition-transform" />
+            <span>Download</span>
+          </a>
+
+          <a
+            href="#contact"
+            className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-zinc-100 dark:bg-zinc-900/80 text-zinc-900 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 text-sm font-medium transition-all"
+          >
+            <span>Get in touch</span>
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-zinc-400 group-hover:text-zinc-950 dark:group-hover:text-zinc-100" />
+          </a>
+        </motion.div>
+      </motion.div>
+
+      {/* Subtle Bottom Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+        className="relative z-10 pt-12 flex items-center justify-between border-t border-zinc-200/60 dark:border-zinc-800/60 text-xs text-zinc-600 dark:text-zinc-400 font-mono"
+      >
+        <div className="flex items-center gap-4">
+          <span>{personal.roleHeadline}</span>
+        </div>
+        <a
+          href="#work"
+          className="flex items-center gap-2 hover:text-zinc-950 dark:hover:text-zinc-200 transition-colors"
+        >
+          <span>Scroll to explore</span>
+          <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+        </a>
+      </motion.div>
+    </section>
+  );
+};

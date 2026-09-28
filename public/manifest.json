@@ -1,16 +1,15 @@
 {
-  "name": "Muhammad Hassan Askari - Portfolio",
-  "short_name": "Hassan Portfolio",
-  "description": "Portfolio of Muhammad Hassan Askari, Backend Engineer",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0891b2",
+  "short_name": "Muhammad Hassan Askari",
+  "name": "Muhammad Hassan Askari — Software Developer",
   "icons": [
     {
-      "src": "/vite.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
     }
-  ]
+  ],
+  "start_url": "/",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "display": "standalone"
 }

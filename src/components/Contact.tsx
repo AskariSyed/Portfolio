@@ -1,303 +1,190 @@
-import React, { useState } from 'react'
-import { Mail, Phone, Send, CheckCircle, AlertCircle } from 'lucide-react'
-import emailjs from '@emailjs/browser'
-import { profile } from '../data'
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { portfolioData } from '../data/portfolioData';
+import { SectionHeader } from './SectionHeader';
+import { useScrollObserver } from '../hooks/useScrollObserver';
+import { usePrivacyModal } from '../context/PrivacyModalContext';
+import { Mail, Github, Linkedin, ArrowUpRight, Copy, Check, Shield } from 'lucide-react';
 
-type ContactProps = {
-  isDark: boolean;
-};
+export const Contact: React.FC = () => {
+  const { personal } = portfolioData;
+  const { openPrivacy } = usePrivacyModal();
+  const [copied, setCopied] = useState(false);
+  const [subjectTopic, setSubjectTopic] = useState('Junior / Graduate Role Opportunity');
 
-function Contact({ isDark }: ContactProps) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [errors, setErrors] = useState<{[key: string]: string}>({})
+  const copyEmail = () => {
+    navigator.clipboard.writeText(personal.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
 
-  const validateForm = () => {
-    const newErrors: {[key: string]: string} = {}
+  const mailtoUrl = `mailto:${personal.email}?subject=${encodeURIComponent(
+    `[Portfolio Inquiry] ${subjectTopic} — Muhammad Hassan Askari`
+  )}&body=${encodeURIComponent(
+    `Hi Askari,\n\nI reviewed your portfolio and would like to discuss an opportunity regarding ${subjectTopic}.\n\nBest regards,\n`
+  )}`;
 
-    if (!formData.name.trim()) newErrors.name = 'Name is required'
-    if (!formData.email.trim()) newErrors.email = 'Email is required'
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid'
-    if (!formData.subject.trim()) newErrors.subject = 'Subject is required'
-    if (!formData.message.trim()) newErrors.message = 'Message is required'
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }))
-    }
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!validateForm()) return
-
-    // Check if EmailJS is configured
-    if (!import.meta.env.VITE_EMAILJS_SERVICE_ID || !import.meta.env.VITE_EMAILJS_TEMPLATE_ID || !import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
-      setSubmitStatus('error')
-      return
-    }
-
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-
-    try {
-      // EmailJS configuration - you'll need to set these up in your EmailJS account
-      const result = await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to_email: profile.email,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      )
-
-      if (result.text === 'OK') {
-        setSubmitStatus('success')
-        setFormData({ name: '', email: '', subject: '', message: '' })
-      } else {
-        throw new Error('Failed to send message')
-      }
-    } catch (error) {
-      console.error('EmailJS error:', error)
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+  const { ref, isInView, containerVariants, itemVariants, cardVariants } =
+    useScrollObserver<HTMLDivElement>({
+      amount: 0.15,
+      margin: '-60px 0px -40px 0px',
+      staggerDelay: 0.12,
+    });
 
   return (
-    <section id="contact" className="py-12 md:py-16" style={{ background: isDark ? 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', borderRadius: '1rem md:2rem', marginTop: '2rem md:4rem' }}>
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
-        <div className="text-center space-y-6 md:space-y-8">
-          <div className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`}>Let’s build</div>
-          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Need backend, mobile, or web development?</h2>
-          <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-            I build robust backend systems with .NET and SQL, cross-platform mobile apps with Flutter and Firebase, and responsive web applications. Let's create something amazing together.
-          </p>
-        </div>
+    <section id="contact" className="py-24 px-6 sm:px-8 max-w-6xl mx-auto scroll-mt-20">
+      {/* Animated Section Header */}
+      <SectionHeader
+        kicker="Get In Touch"
+        title="Let's Connect"
+        badge={
+          <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Responding within 24 hours</span>
+          </div>
+        }
+      />
 
-        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 mt-8 md:mt-12">
-          {/* Contact Form */}
-          <div className={`p-6 md:p-8 rounded-xl md:rounded-2xl ${isDark ? 'bg-slate-800/50 border border-slate-700' : 'bg-white border border-slate-200'} shadow-xl`}>
-            <h3 className={`text-xl md:text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>Send me a message</h3>
-
-            {submitStatus === 'success' && (
-              <div className={`flex items-center gap-3 p-4 rounded-lg mb-6 ${isDark ? 'bg-green-900/20 border border-green-700 text-green-400' : 'bg-green-50 border border-green-200 text-green-700'}`}>
-                <CheckCircle size={20} />
-                <span>Message sent successfully! I'll get back to you soon.</span>
-              </div>
-            )}
-
-            {submitStatus === 'error' && (
-              <div className={`flex items-center gap-3 p-4 rounded-lg mb-6 ${isDark ? 'bg-red-900/20 border border-red-700 text-red-400' : 'bg-red-50 border border-red-200 text-red-700'}`}>
-                <AlertCircle size={20} />
-                <span>
-                  {!import.meta.env.VITE_EMAILJS_SERVICE_ID
-                    ? "Contact form not configured. Please use the contact information below or email me directly."
-                    : "Failed to send message. Please try again or contact me directly."
-                  }
-                </span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className={`block text-sm font-medium mb-2 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-3 rounded-lg border transition-colors ${
-                      errors.name
-                        ? 'border-red-500 focus:border-red-500'
-                        : isDark
-                          ? 'border-slate-600 bg-slate-700 text-white focus:border-cyan-400'
-                          : 'border-slate-300 bg-white text-slate-900 focus:border-cyan-500'
-                    } focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
-                      errors.name ? 'focus:ring-red-500' : 'focus:ring-cyan-500'
-                    }`}
-                    placeholder="Your name"
-                  />
-                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="email" className={`block text-sm font-medium mb-2 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-3 rounded-lg border transition-colors ${
-                      errors.email
-                        ? 'border-red-500 focus:border-red-500'
-                        : isDark
-                          ? 'border-slate-600 bg-slate-700 text-white focus:border-cyan-400'
-                          : 'border-slate-300 bg-white text-slate-900 focus:border-cyan-500'
-                    } focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
-                      errors.email ? 'focus:ring-red-500' : 'focus:ring-cyan-500'
-                    }`}
-                    placeholder="your.email@example.com"
-                  />
-                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="subject" className={`block text-sm font-medium mb-2 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-                  Subject *
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  className={`w-full px-4 py-3 rounded-lg border transition-colors ${
-                    errors.subject
-                      ? 'border-red-500 focus:border-red-500'
-                      : isDark
-                        ? 'border-slate-600 bg-slate-700 text-white focus:border-cyan-400'
-                        : 'border-slate-300 bg-white text-slate-900 focus:border-cyan-500'
-                  } focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
-                    errors.subject ? 'focus:ring-red-500' : 'focus:ring-cyan-500'
-                  }`}
-                  placeholder="Project inquiry, collaboration, etc."
-                />
-                {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="message" className={`block text-sm font-medium mb-2 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={5}
-                  className={`w-full px-4 py-3 rounded-lg border transition-colors resize-vertical ${
-                    errors.message
-                      ? 'border-red-500 focus:border-red-500'
-                      : isDark
-                        ? 'border-slate-600 bg-slate-700 text-white focus:border-cyan-400'
-                        : 'border-slate-300 bg-white text-slate-900 focus:border-cyan-500'
-                  } focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
-                    errors.message ? 'focus:ring-red-500' : 'focus:ring-cyan-500'
-                  }`}
-                  placeholder="Tell me about your project, ideas, or how we can work together..."
-                />
-                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-              </div>
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+        variants={containerVariants}
+        className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
+      >
+        {/* Left: Big Email Callout & Direct Links (7 columns) */}
+        <motion.div variants={itemVariants} className="lg:col-span-7 space-y-8">
+          <div>
+            <p className="text-xs font-mono uppercase text-zinc-600 dark:text-zinc-400 mb-2">
+              Direct Inquiries
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={mailtoUrl}
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all"
+              >
+                {personal.email}
+              </a>
 
               <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none ${
-                  isDark
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50'
-                    : 'bg-gradient-to-r from-slate-800 to-slate-900 text-white shadow-lg hover:shadow-slate-800/50'
-                }`}
+                onClick={copyEmail}
+                aria-label="Copy email address"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-xs font-mono text-zinc-700 dark:text-zinc-300 transition-colors"
               >
-                {isSubmitting ? (
+                {copied ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-                    Sending...
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Send size={20} />
-                    Send Message
+                    <Copy className="w-3.5 h-3.5" />
+                    <span>Copy</span>
                   </>
                 )}
               </button>
-            </form>
-          </div>
-
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <div className={`p-6 md:p-8 rounded-xl md:rounded-2xl ${isDark ? 'bg-slate-800/50 border border-slate-700' : 'bg-white border border-slate-200'} shadow-xl`}>
-              <h3 className={`text-xl md:text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>Get in touch</h3>
-              <div className="space-y-4">
-                <a
-                  href={`mailto:${profile.email}`}
-                  className={`flex items-center gap-4 p-4 rounded-lg transition-all hover:scale-105 ${
-                    isDark ? 'hover:bg-slate-700/50 text-slate-300' : 'hover:bg-slate-50 text-slate-600'
-                  }`}
-                >
-                  <div className={`p-3 rounded-full ${isDark ? 'bg-cyan-500/20' : 'bg-cyan-100'}`}>
-                    <Mail size={20} className={isDark ? 'text-cyan-400' : 'text-cyan-600'} />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold">Email</div>
-                    <div className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{profile.email}</div>
-                  </div>
-                </a>
-
-                <a
-                  href="tel:+923355552845"
-                  className={`flex items-center gap-4 p-4 rounded-lg transition-all hover:scale-105 ${
-                    isDark ? 'hover:bg-slate-700/50 text-slate-300' : 'hover:bg-slate-50 text-slate-600'
-                  }`}
-                >
-                  <div className={`p-3 rounded-full ${isDark ? 'bg-cyan-500/20' : 'bg-cyan-100'}`}>
-                    <Phone size={20} className={isDark ? 'text-cyan-400' : 'text-cyan-600'} />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold">Phone</div>
-                    <div className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>+92 335 555 2845</div>
-                  </div>
-                </a>
-
-                <div className={`flex items-center gap-4 p-4 rounded-lg ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                  <div className={`p-3 rounded-full ${isDark ? 'bg-cyan-500/20' : 'bg-cyan-100'}`}>
-                    <div className={`w-5 h-5 rounded-full ${isDark ? 'bg-cyan-400' : 'bg-cyan-600'}`}></div>
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold">Location</div>
-                    <div className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{profile.location}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={`p-6 rounded-xl md:rounded-2xl ${isDark ? 'bg-slate-800/50 border border-slate-700' : 'bg-white border border-slate-200'} shadow-xl`}>
-              <h4 className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>Response Time</h4>
-              <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                I typically respond to messages within 24 hours. For urgent inquiries, feel free to call directly.
-              </p>
             </div>
           </div>
-        </div>
-      </div>
+
+          <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
+            Currently open to junior/graduate software engineering roles and freelance engineering contracts across Web, Mobile, Scalable Backends (C#/.NET, Python/FastAPI), and Applied AI systems. Feel free to reach out directly.
+          </p>
+
+          {/* Social Profiles */}
+          <div className="pt-4 flex flex-wrap gap-4">
+            <a
+              href={personal.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-sm font-mono text-zinc-800 dark:text-zinc-200 transition-all shadow-sm"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+            </a>
+
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-sm font-mono text-zinc-800 dark:text-zinc-200 transition-all shadow-sm"
+            >
+              <Linkedin className="w-4 h-4 text-blue-500" />
+              <span>LinkedIn</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Right: Quick Mailto Composer (5 columns) with card scale entrance */}
+        <motion.div
+          variants={cardVariants}
+          className="lg:col-span-5 p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 space-y-6 shadow-sm hover:shadow-md"
+        >
+          <div className="space-y-1">
+            <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+              Quick Contact Launcher
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">
+              Select an inquiry type to pre-fill your email client directly.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <label className="block text-xs font-mono uppercase text-zinc-600 dark:text-zinc-400">
+              Topic of Interest
+            </label>
+            <div className="space-y-2">
+              {[
+                'Freelance: Web, Mobile, Backend & Scalable AI',
+                'Junior / Graduate Role Opportunity',
+                'Scalable Backend & Cloud (.NET / FastAPI / AWS)',
+                'Applied AI & RAG Pipeline Engineering',
+                'General Inquiries & Chat',
+              ].map((topic) => (
+                <button
+                  key={topic}
+                  type="button"
+                  onClick={() => setSubjectTopic(topic)}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between ${
+                    subjectTopic === topic
+                      ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                      : 'bg-zinc-100 dark:bg-zinc-800/60 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/60'
+                  }`}
+                >
+                  <span>{topic}</span>
+                  {subjectTopic === topic && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <a
+            href={mailtoUrl}
+            className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold tracking-wide transition-all shadow-md active:scale-[0.98]"
+          >
+            <Mail className="w-4 h-4" />
+            <span>Launch Email Client</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+
+          <div className="text-center space-y-1.5 pt-1">
+            <span className="block text-[11px] font-mono text-zinc-600 dark:text-zinc-400">
+              No backend forms · Direct client-to-client communication
+            </span>
+            <button
+              type="button"
+              onClick={openPrivacy}
+              className="inline-flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 hover:text-blue-500 dark:hover:text-blue-400 underline underline-offset-2 transition-colors cursor-pointer"
+            >
+              <Shield className="w-3 h-3 text-emerald-400" />
+              <span>Zero-tracking Privacy Policy</span>
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
     </section>
-  )
-}
-
-export default Contact
+  );
+};
