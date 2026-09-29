@@ -28,7 +28,7 @@ export default function App() {
     <ThemeProvider>
       <ResumeModalProvider>
         <PrivacyModalProvider>
-          <div className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-blue-600 selection:text-white transition-colors duration-200 relative overflow-x-hidden">
+          <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#131718] text-zinc-900 dark:text-zinc-100 selection:bg-blue-600 selection:text-white transition-colors duration-200 relative overflow-x-hidden">
             {/* Fixed Bg.png background — fades on scroll */}
             <ScrollAnimationBackground />
             {/* Interactive Mouse-following Grid Canvas */}
