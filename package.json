@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node ./node_modules/vite/bin/vite.js --port=3000 --host=0.0.0.0",
     "sitemap:update": "node scripts/update-sitemap.mjs",
-    "prebuild": "node scripts/update-sitemap.mjs",
+    "prebuild": "node -e \"import('fs').then(fs => fs.existsSync('./scripts/update-sitemap.mjs') && import('./scripts/update-sitemap.mjs'))\"",
     "build": "node ./node_modules/typescript/bin/tsc --noEmit && node ./node_modules/vite/bin/vite.js build",
     "preview": "node ./node_modules/vite/bin/vite.js preview",
     "clean": "rm -rf dist server.js",

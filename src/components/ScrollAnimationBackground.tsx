@@ -29,7 +29,7 @@ export const ScrollAnimationBackground: React.FC = () => {
   // Helper to format frame URL
   const getFrameUrl = useCallback((mode: 'light' | 'dark', index: number) => {
     const padded = String(index).padStart(3, '0');
-    return `/frames/${mode}mode-frames/ezgif-frame-${padded}.jpg`;
+    return `/frames/${mode}mode-frames/ezgif-frame-${padded}.webp`;
   }, []);
 
   // Helper to load a single frame
