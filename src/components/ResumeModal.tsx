@@ -53,7 +53,7 @@ export const ResumeModal: React.FC = () => {
                 </span>
               </div>
               <p className="text-xs text-zinc-400 font-mono hidden sm:block">
-                Junior Software Engineer · COMSATS University Islamabad
+                Software Developer (AI & Full-Stack) · Remote Worldwide
               </p>
             </div>
           </div>

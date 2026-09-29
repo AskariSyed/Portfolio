@@ -4,6 +4,8 @@
  */
 
 import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ThemeProvider } from './context/ThemeContext';
 import { ResumeModalProvider } from './context/ResumeModalContext';
 import { PrivacyModalProvider } from './context/PrivacyModalContext';
@@ -55,6 +57,10 @@ export default function App() {
           </div>
         </PrivacyModalProvider>
       </ResumeModalProvider>
+      {/* Vercel Analytics — counts visitors & page views */}
+      <Analytics />
+      {/* Vercel Speed Insights — measures Core Web Vitals (LCP, FID, CLS) */}
+      <SpeedInsights />
     </ThemeProvider>
   );
 }

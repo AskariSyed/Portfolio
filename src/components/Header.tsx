@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-white/80 backdrop-blur-md border-b border-zinc-800/60 dark:border-zinc-800/60 py-3.5 shadow-sm'
+          ? 'bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800/60 py-3.5 shadow-sm'
           : 'bg-transparent py-6'
       }`}
     >
@@ -101,7 +101,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-zinc-950/95 dark:bg-zinc-950/95 light:bg-white/95 backdrop-blur-lg border-b border-zinc-800 px-6 py-4 space-y-3">
+        <div className="md:hidden bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-200 dark:border-zinc-800 px-6 py-4 space-y-3">
           {navLinks.map((link) => (
             <a
               key={link.name}
