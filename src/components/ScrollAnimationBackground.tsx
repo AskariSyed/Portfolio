@@ -52,69 +52,7 @@ export const ScrollAnimationBackground: React.FC = () => {
     [getFrameUrl]
   );
 
-  // Draw a frame image with zoomed-out scale and bottom-aligned framing
-  const drawImageToCanvas = useCallback(
-    (img: HTMLImageElement, activeTheme: 'light' | 'dark') => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d', { alpha: false });
-      if (!ctx) return;
-
-      const { width, height, dpr } = viewportRef.current;
-      if (width === 0 || height === 0) return;
-
-      const iw = img.naturalWidth || 1920;
-      const ih = img.naturalHeight || 1080;
-
-      ctx.save();
-      // Scale canvas context by DPR for razor-sharp rendering on Retina/HiDPI screens
-      ctx.scale(dpr, dpr);
-
-      // Enable high-quality image smoothing to eliminate blur
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-
-      // Fill canvas background with exact matching theme color so edges blend seamlessly
-      const isDark = activeTheme === 'dark';
-      ctx.fillStyle = isDark ? '#131718' : '#f5f5f5';
-      ctx.fillRect(0, 0, width, height);
-
-      // Zoomed-out scaling calculation:
-      // Ensure the frame is scaled down so everything is smaller and character feet are never cut off
-      const isMobile = width < 768;
-      let scale: number;
-      let bottomPadding: number;
-
-      if (isMobile) {
-        // Mobile: comfortable width fit, preventing any vertical cut
-        scale = Math.min((width * 0.96) / iw, (height * 0.78) / ih);
-        bottomPadding = Math.max(20, height * 0.05);
-      } else {
-        // Desktop / Laptop / Tablet:
-        // Scaled to ~82% of viewport height & 86% of width so the character is smaller,
-        // crisp (no over-magnification blur), and comfortably framed
-        const maxHScale = (height * 0.82) / ih;
-        const maxWScale = (width * 0.86) / iw;
-        scale = Math.min(maxWScale, maxHScale);
-        bottomPadding = Math.max(28, height * 0.055);
-      }
-
-      const drawW = iw * scale;
-      const drawH = ih * scale;
-
-      // Center horizontally
-      const offX = (width - drawW) / 2;
-
-      // Bottom-align with breathing room so the feet (which are at 96.7% height) are completely visible
-      const offY = Math.max(16, height - drawH - bottomPadding);
-
-      ctx.drawImage(img, offX, offY, drawW, drawH);
-      ctx.restore();
-    },
-    []
-  );
-
-  // Find exact or nearest loaded frame to avoid flickering
+  // Find exact or nearest loaded frame
   const getBestFrameImage = useCallback(
     (mode: 'light' | 'dark', targetIndex: number): HTMLImageElement | null => {
       const cache = imagesCache.current[mode];
@@ -122,7 +60,6 @@ export const ScrollAnimationBackground: React.FC = () => {
         return cache.get(targetIndex)!;
       }
 
-      // Find nearest loaded frame
       let nearest: HTMLImageElement | null = null;
       let minDiff = Infinity;
       for (const [idx, img] of cache.entries()) {
@@ -137,37 +74,112 @@ export const ScrollAnimationBackground: React.FC = () => {
     []
   );
 
-  // Render loop
+  // Draw two frames with alpha blending for buttery-smooth transition
+  const drawBlendedFramesToCanvas = useCallback(
+    (
+      imgFloor: HTMLImageElement,
+      imgCeil: HTMLImageElement | null,
+      blendRatio: number,
+      activeTheme: 'light' | 'dark'
+    ) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: false });
+      if (!ctx) return;
+
+      const { width, height, dpr } = viewportRef.current;
+      if (width === 0 || height === 0) return;
+
+      const iw = imgFloor.naturalWidth || 1920;
+      const ih = imgFloor.naturalHeight || 1080;
+
+      ctx.save();
+      ctx.scale(dpr, dpr);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+
+      // Solid backdrop matching edge color
+      const isDark = activeTheme === 'dark';
+      ctx.fillStyle = isDark ? '#131718' : '#f5f5f5';
+      ctx.fillRect(0, 0, width, height);
+
+      // Scaled framing so the character is smaller and feet are never cut off
+      const isMobile = width < 768;
+      let scale: number;
+      let bottomPadding: number;
+
+      if (isMobile) {
+        scale = Math.min((width * 0.96) / iw, (height * 0.78) / ih);
+        bottomPadding = Math.max(20, height * 0.05);
+      } else {
+        const maxHScale = (height * 0.82) / ih;
+        const maxWScale = (width * 0.86) / iw;
+        scale = Math.min(maxWScale, maxHScale);
+        bottomPadding = Math.max(28, height * 0.055);
+      }
+
+      const drawW = iw * scale;
+      const drawH = ih * scale;
+      const offX = (width - drawW) / 2;
+      const offY = Math.max(16, height - drawH - bottomPadding);
+
+      // 1. Draw base (floor) frame
+      ctx.globalAlpha = 1.0;
+      ctx.drawImage(imgFloor, offX, offY, drawW, drawH);
+
+      // 2. Crossfade next (ceil) frame on top according to subframe decimal
+      if (blendRatio > 0.008 && imgCeil && imgCeil !== imgFloor) {
+        ctx.globalAlpha = blendRatio;
+        ctx.drawImage(imgCeil, offX, offY, drawW, drawH);
+      }
+
+      ctx.restore();
+    },
+    []
+  );
+
+  // Render loop with fluid dampening and continuous crossfade
   const renderLoop = useCallback(() => {
-    // Lerp current frame towards target frame for silky smooth animation
+    // Smoother lerping (0.09) eliminates discrete scroll jumps
     const diff = targetFrameRef.current - currentFrameRef.current;
-    if (Math.abs(diff) > 0.01) {
-      currentFrameRef.current += diff * 0.18;
+    if (Math.abs(diff) > 0.001) {
+      currentFrameRef.current += diff * 0.09;
     } else {
       currentFrameRef.current = targetFrameRef.current;
     }
 
-    const frameToDraw = Math.round(
-      Math.min(TOTAL_FRAMES, Math.max(1, currentFrameRef.current))
+    const currentPos = Math.min(
+      TOTAL_FRAMES,
+      Math.max(1, currentFrameRef.current)
     );
+
+    const floorIndex = Math.floor(currentPos);
+    const ceilIndex = Math.min(TOTAL_FRAMES, floorIndex + 1);
+    const blendRatio = currentPos - floorIndex;
 
     const activeTheme = theme === 'dark' ? 'dark' : 'light';
 
-    // Redraw if frame or theme changed
-    if (
-      frameToDraw !== lastDrawnFrameRef.current ||
-      activeTheme !== lastDrawnThemeRef.current
-    ) {
-      const img = getBestFrameImage(activeTheme, frameToDraw);
-      if (img) {
-        drawImageToCanvas(img, activeTheme);
-        lastDrawnFrameRef.current = frameToDraw;
+    // Redraw whenever position shifts noticeably or theme changes
+    const shouldDraw =
+      Math.abs(currentPos - lastDrawnFrameRef.current) > 0.005 ||
+      activeTheme !== lastDrawnThemeRef.current;
+
+    if (shouldDraw) {
+      const imgFloor = getBestFrameImage(activeTheme, floorIndex);
+      const imgCeil =
+        blendRatio > 0.008
+          ? getBestFrameImage(activeTheme, ceilIndex)
+          : null;
+
+      if (imgFloor) {
+        drawBlendedFramesToCanvas(imgFloor, imgCeil, blendRatio, activeTheme);
+        lastDrawnFrameRef.current = currentPos;
         lastDrawnThemeRef.current = activeTheme;
       }
     }
 
     rafIdRef.current = requestAnimationFrame(renderLoop);
-  }, [theme, getBestFrameImage, drawImageToCanvas]);
+  }, [theme, getBestFrameImage, drawBlendedFramesToCanvas]);
 
   // Handle Resize and DPR
   const handleResize = useCallback(() => {
@@ -182,7 +194,7 @@ export const ScrollAnimationBackground: React.FC = () => {
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
 
-    // Force redraw on next frame
+    // Force redraw
     lastDrawnFrameRef.current = -1;
   }, []);
 
@@ -198,10 +210,7 @@ export const ScrollAnimationBackground: React.FC = () => {
     }
 
     const progress = Math.min(1, Math.max(0, scrollTop / maxScroll));
-    const target = Math.min(
-      TOTAL_FRAMES,
-      Math.max(1, Math.round(progress * (TOTAL_FRAMES - 1)) + 1)
-    );
+    const target = 1 + progress * (TOTAL_FRAMES - 1);
     targetFrameRef.current = target;
   }, []);
 
@@ -232,31 +241,31 @@ export const ScrollAnimationBackground: React.FC = () => {
     // 1. Instantly load initial frame of active theme
     loadFrame(activeMode, 1).then((img) => {
       setInitialFrameLoaded(true);
-      drawImageToCanvas(img, activeMode);
+      drawBlendedFramesToCanvas(img, null, 0, activeMode);
       lastDrawnFrameRef.current = 1;
       lastDrawnThemeRef.current = activeMode;
     });
 
-    // 2. Preload first frame of opposite theme so instant toggle is ready
+    // 2. Preload first frame of opposite theme
     loadFrame(otherMode, 1);
 
-    // 3. Progressively preload all remaining frames of current theme in batches
+    // 3. Progressively preload all remaining frames
     let isCancelled = false;
 
     const preloadBatch = async () => {
       for (let i = 2; i <= TOTAL_FRAMES; i++) {
         if (isCancelled) return;
         await loadFrame(activeMode, i).catch(() => {});
-        if (i % 5 === 0) {
-          await new Promise((r) => setTimeout(r, 10));
+        if (i % 6 === 0) {
+          await new Promise((r) => setTimeout(r, 8));
         }
       }
 
       for (let i = 2; i <= TOTAL_FRAMES; i++) {
         if (isCancelled) return;
         await loadFrame(otherMode, i).catch(() => {});
-        if (i % 5 === 0) {
-          await new Promise((r) => setTimeout(r, 20));
+        if (i % 6 === 0) {
+          await new Promise((r) => setTimeout(r, 16));
         }
       }
     };
@@ -266,7 +275,7 @@ export const ScrollAnimationBackground: React.FC = () => {
     return () => {
       isCancelled = true;
     };
-  }, [theme, loadFrame, drawImageToCanvas]);
+  }, [theme, loadFrame, drawBlendedFramesToCanvas]);
 
   return (
     <div
