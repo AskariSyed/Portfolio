@@ -65,12 +65,12 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   personal: {
     name: "Muhammad Hassan Askari",
-    roleHeadline: "Junior Software Engineer — Applied AI & Full-Stack",
+    roleHeadline: "Software Developer (AI & Full-Stack) — Remote Worldwide",
     shortBio:
-      "Detail-oriented software engineer with a strong foundation in full-stack engineering, scalable backend architectures (ASP.NET Core, FastAPI, Python), DevOps automation (AWS, Docker, CI/CD), and applied AI systems (RAG, pgvector, Computer Vision).",
+      "Remote-ready software engineer with a strong foundation in full-stack engineering, scalable backend architectures (ASP.NET Core, FastAPI, Python), DevOps automation (AWS, Docker, CI/CD), and applied AI systems (RAG, pgvector, Computer Vision). Based in Islamabad, Pakistan — open to remote roles globally.",
     education: "BS Computer Science, COMSATS University Islamabad (2022–2026) · CGPA: 3.65 / 4.00",
-    location: "Islamabad, Pakistan",
-    status: "Open to Junior Software Engineer roles, graduate programs, and freelance engineering contracts across Web, Mobile, Scalable Backends, and Applied AI.",
+    location: "Islamabad, Pakistan · Remote Worldwide",
+    status: "Open to remote Junior / Graduate Software Engineer roles, freelance engineering contracts (Web, Mobile, Scalable Backends, Applied AI) — available worldwide: USA, UK, UAE, Canada, Australia, Europe.",
     email: "askari.syed04@gmail.com",
     phone: "+92 335 555 2845",
     github: "https://github.com/AskariSyed",
